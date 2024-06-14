@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name=viewport content="initial-scale=1.0, user-scalable=no">
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8" />
+    <title>Sinergy Hotel Solutions - Reservation Page</title>
+    <link rel=stylesheet href=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css
+        integrity=sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7 crossorigin=anonymous>
+    <link rel=stylesheet href=https://www.bookandlink.com//booking/css/styles2.css>
+    <link rel="stylesheet" href="https://www.bookandlink.com//booking/js/jquery/jquery-ui.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <link href="https://www.bookandlink.com/ratewidget/ratewidget_ibe.css" rel="stylesheet" type="text/css" />
+    <script src=https://code.jquery.com/jquery-2.2.0.min.js></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src=https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js
+        integrity=sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS
+        crossorigin=anonymous></script>
+
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.4/jquery.touchSwipe.min.js></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.lazyload/1.9.1/jquery.lazyload.min.js"
+        integrity="sha512-jNDtFf7qgU0eH/+Z42FG4fw3w7DM/9zbgNPe3wfJlCylVDTT3IgKW5r92Vy9IHa6U50vyMz5gRByIu4YIXFtaQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <meta property=og:description content="Check out this property." />
+    <meta property=og:type content="hotel" />
+    <meta property=og:image content="https://www.bookandlink.com/admin/assets/img/booking_images/" />
+    <meta property=og:title content="" />
+    <meta property=og:site_name content="Reservation page" />
+    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script> -->
+</head>
+<script>
+    $(document).ready(function () {
+        if (screen.width >= 1000) {
+            $(".bigcontainer").addClass("container2");
+        }
+    });
+</script>
+
+<style>
+    #property_list li {
+        display: inline-block;
+        vertical-align: middle;
+        float: none;
+    }
+
+    .carousel {
+        /* height: 333px;*/
+    }
+
+    .link_properties:visited {
+        color: white;
+        text-decoration: underline;
+    }
+
+    .link_properties:hover {
+        color: orange;
+    }
+
+    .container2 {
+        padding-right: 0px;
+        padding-left: 0px;
+        margin-right: auto;
+        margin-left: auto;
+        width: 100%
+    }
+
+    .ui-datepicker {
+        width: 100%;
+        /*what ever width you want*/
+    }
+</style>
+<style>
+    /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+    #map {
+        height: 100%;
+    }
+
+    /* Optional: Makes the sample page fill the window. */
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .property {
+        padding-top: 20px;
+    }
+
+    .details {
+        padding: 5px 10px 5px 10px;
+        background-color: #ffffff;
+        color: #798b8b;
+        border-radius: 3px;
+    }
+
+    .details p {
+        margin: 2px;
+    }
+
+    .link_ibe {
+        font-size: 16px;
+        font-weight: bold
+    }
+
+    .contact-icons-right {
+        width: 100%;
+    }
+
+    #map {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+    }
+
+    .second-column {
+        overflow-y: auto;
+        position: relative;
+        margin-bottom: 50px;
+    }
+
+    .ui-widget.ui-widget-content {
+        border: 1px solid black !important;
+
+    }
+
+    .ui-widget-header {
+        background: #a08787;
+    }
+
+    .ui-slider .ui-state-default,
+    .ui-slider .ui-widget-content .ui-state-default,
+    .ui-slider .ui-widget-header .ui-state-default {
+        background: black !important;
+        cursor: pointer
+    }
+
+
+    @media (max-width:768px) {
+        .link_ibe {
+            font-size: 11px;
+            font-weight: bold
+        }
+
+        .details {
+            width: 100%;
+        }
+
+        #map {
+            width: 90%;
+            margin: auto;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            height: 300px !important;
+        }
+
+        .second-column {
+            overflow-y: inherit;
+        }
+    }
+</style>
+</head>
+
+<body style="background-color:#f7f7f7">
+
+
+    <div id="header">
+        <div class="bigcontainer block1 top-header" style='background-color:#40271e'>
+            <div class=container style="padding:10px 20px 10px 20px">
+                <div style="display:inline-block;">
+                    <a target="_blank" style="color:#ffffff" href="" class="hotel-title">
+                        Sinergy Hotel Solutions</a><a target="_blank" style="margin-left:10px;color:#ffffff" href="">
+                        <i style="color:#ffffff" class="glyphicon glyphicon-home my-icon-home"></i></a>
+                </div>
+                <div class="pull-right dropdown">
+                    <a href=# style="color:#ffffff" type=button class=currency-desktop data-toggle=collapse
+                        data-target=#demo><span id="currency_code">IDR</span> | English - EN <i style
+                            class="currency-caret glyphicon glyphicon-triangle-bottom"></i></a>
+                    <a href=# style="color:#ffffff" type=button class=currency-mobile data-toggle=collapse
+                        data-target=#demo><i style class="glyphicon glyphicon-align-justify"></i></a>
+                </div>
+            </div>
+            <div id=demo class="collapse currency-dropdown">
+                <div class=bigcontainer style=background-color:#000>
+                    <div class=container style="padding:0 0 20px 0;color:white">
+                        <div class=col-sm-3 style=margin-top:15px>
+                            <div class=col-sm-12>
+                                <h1>Languages</h1>
+                                <ul>
+                                    <li class><a class=selected style href='booking-page.php?id=&lang_id=100'><img
+                                                src=https://www.bookandlink.com/booking/img/blank.gif
+                                                class="flag flag-gb" alt="English" /> English selected</a></li>
+                                    <li class><a class=style href='booking-page.php?id=&lang_id=1'><img
+                                                src=https://www.bookandlink.com/booking/img/blank.gif
+                                                class="flag flag-gb" alt="Bahasa Indonesia" /> Bahasa Indonesia </a>
+                                    </li>
+                                    <li class><a class=style href='booking-page.php?id=&lang_id=2'><img
+                                                src=https://www.bookandlink.com/booking/img/blank.gif
+                                                class="flag flag-gb" alt="Russian" /> Russian </a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class=col-sm-9 style="margin-top:15px">
+                            <div class=col-sm-4>
+                                <h1>Currencies</h1>
+                                <ul>
+                                    <li><a href="javascript:;" class="currency" data-currency="AUD">AUD - Australian
+                                            Dollars <span class="currency_icon"></span></a></li>
+                                    <li><a href="javascript:;" class="currency" data-currency="CAD">CAD - Canada Dollars
+                                            <span class="currency_icon"></span></a></li>
+                                    <li><a href="javascript:;" class="currency" data-currency="CNY">CNY - China Yuan
+                                            Renminbi <span class="currency_icon"></span></a></li>
+                                    <li><a href="javascript:;" class="currency" data-currency="DKK">DKK - Denmark Kroner
+                                            <span class="currency_icon"></span></a></li>
+                                </ul>
+                            </div>
+                            <div class=col-sm-4>
+                                <h1>&nbsp;</h1>
+                                <ul>
+                                    <li><a href="javascript:;" class="currency" data-currency="EUR">EUR - Euro <span
+                                                class="currency_icon"></span></a></li>
+                                    <li><a href="javascript:;" class="currency" data-currency="GBP">GBP - United Kingdom
+                                            Pounds <span class="currency_icon"></span></a></li>
+                                    <li><a href="javascript:;" class="selected currency" data-currency="IDR">IDR -
+                                            Indonesia Rupiahs <span class="currency_icon"><i style
+                                                    class="glyphicon glyphicon-ok"></i></span></a></li>
+                                    <li><a href="javascript:;" class="currency" data-currency="ILS">ILS - Israel New
+                                            Shekels <span class="currency_icon"></span></a></li>
+                                </ul>
+                            </div>
+                            <div class=col-sm-4>
+                                <h1>&nbsp;</h1>
+                                <ul>
+                                    <li><a href="javascript:;" class="currency" data-currency="INR">INR - India Rupees
+                                            <span class="currency_icon"></span></a></li>
+                                    <li><a href="javascript:;" class="currency" data-currency="JPY">JPY - Japan Yen
+                                            <span class="currency_icon"></span></a></li>
+                                    <li><a href="javascript:;" class="currency" data-currency="KRW">KRW - South Korea
+                                            Won <span class="currency_icon"></span></a></li>
+                                    <li><a href="javascript:;" class="currency" data-currency="MYR">MYR - Malaysia
+                                            Ringgits <span class="currency_icon"></span></a></li>
+                                </ul>
+                            </div>
+                            <div class=col-sm-4>
+                                <h1>&nbsp;</h1>
+                                <ul>
+                                    <li><a href="javascript:;" class="currency" data-currency="NOK">NOK - Norway Kroner
+                                            <span class="currency_icon"></span></a></li>
+                                    <li><a href="javascript:;" class="currency" data-currency="NZD">NZD - New Zealand
+                                            Dollars <span class="currency_icon"></span></a></li>
+                                    <li><a href="javascript:;" class="currency" data-currency="OMR">OMR - Oman Rials
+                                            <span class="currency_icon"></span></a></li>
+                                    <li><a href="javascript:;" class="currency" data-currency="PHP">PHP - Philippines
+                                            Pesos <span class="currency_icon"></span></a></li>
+                                </ul>
+                            </div>
+                            <div class=col-sm-4>
+                                <h1>&nbsp;</h1>
+                                <ul>
+                                    <li><a href="javascript:;" class="currency" data-currency="RUB">RUB - Russia Rubles
+                                            <span class="currency_icon"></span></a></li>
+                                    <li><a href="javascript:;" class="currency" data-currency="SAR">SAR - Saudi Arabia
+                                            Riyals <span class="currency_icon"></span></a></li>
+                                    <li><a href="javascript:;" class="currency" data-currency="SEK">SEK - Sweden Kronor
+                                            <span class="currency_icon"></span></a></li>
+                                    <li><a href="javascript:;" class="currency" data-currency="SGD">SGD - Singapore
+                                            Dollars <span class="currency_icon"></span></a></li>
+                                </ul>
+                            </div>
+                            <div class=col-sm-4>
+                                <h1>&nbsp;</h1>
+                                <ul>
+                                    <li><a href="javascript:;" class="currency" data-currency="THB">THB - Thailand Baht
+                                            <span class="currency_icon"></span></a></li>
+                                    <li><a href="javascript:;" class="currency" data-currency="USD">USD - United States
+                                            Dollars <span class="currency_icon"></span></a></li>
+                                    <li><a href="javascript:;" class="currency" data-currency="VND">VND - Vietnam Dong
+                                            <span class="currency_icon"></span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="">
+           
+
+        </div>
+
+        <!-- ----------------------------------------------------------------------------- -->
+
+        <div class="bigcontainer datepickerblock" style="background-color:#40271e">
+            <div style='padding:0;width:100%;margin:auto;display: table;content: " ";'>
+                <div style=width:160px;margin:10px class="check-in-date-picker pull-left">
+                    <input style='cursor:pointer' value="01 June 2023" type="text" data-months="1" data-url=""
+                        data-arrow="false" data-rateplan="" readonly data-roomtype="" data-property="" id="checkin"
+                        class="datepicker form-control">
+                </div>
+                <div style=width:160px;margin:10px class="check-in-date-picker pull-left">
+                    <input style='cursor:pointer' value="07 June 2023" type="text" data-months="1"
+                        data-url="bookandlink.com" data-arrow="false" data-rateplan="" readonly data-roomtype=""
+                        data-property="" id="checkout" class="datepicker form-control">
+                </div>
+                <div style=width:160px;margin:10px class="region pull-left ">
+                    <select class='form-control search_tag'>
+                        <option value=''>Please Select</option>
+                        <option selected value='banyuwangi'>banyuwangi (1)</option>
+                        <option value='jogja'>jogja (1)</option>
+                        <option value='semarang'>semarang (1)</option>
+                    </select>
+                </div>
+                <div style=width:160px;margin:10px class="region2 pull-left ">
+                    <select class='form-control search_tag2'>
+                        <option value=''>Please Select</option>
+                        <option value='Berlian'>Berlian (1)</option>
+                        <option value='Candiland'>Candiland (1)</option>
+                        <option value='Cozzy'>Cozzy (1)</option>
+                        <option value='Gapura'>Gapura (1)</option>
+                        <option value='Green'>Green (1)</option>
+                        <option value='Youstay'>Youstay (1)</option>
+                    </select>
+                </div>
+
+                <div style=width:100px;margin:10px class="region pull-left ">
+                    <a href='#!' style='border: 1px solid #f9f9f9;display:none;border-radius: 5px;' type='button'
+                        class='btn btn-info show_map'>SHOW MAP</a>
+                    <a href='#!' style='border: 1px solid #f9f9f9;display:none;border-radius: 5px;'
+                        class="btn  btn-primary close_map">CLOSE MAP</a>
+                </div>
+
+                <div style=width:160px;margin:10px class="region pull-left ">
+                    <a href='#!' style='border: 1px solid #f9f9f9;' type='button'
+                        class='btn btn-primary check_availability'>CHECK AVAILABILITY</a>
+                </div>
+
+
+
+
+                <div class='pull-right details' style="background-color:#40271e">
+
+                    <p class="contact-icons-right"><span
+                            class="glyphicon glyphicon-earphone contact-icons-left"></span><span>
+                        </span></p>
+                    <p class="contact-icons-right"><span
+                            class="glyphicon glyphicon-envelope contact-icons-left"></span><span>
+                            <a style="color:#07739f"
+                                href="mailto:sinergyhotel.solutions@gmail.com">sinergyhotel.solutions@gmail.com</a>
+                        </span></p>
+                </div>
+
+
+
+            </div>
+        </div>
+        <div style='display:none' id=promo-code class="collapse currency-dropdown bigcontainer ">
+            <div class=bigcontainer style="background-color:#fff;border-bottom:1px solid #e0e0e0">
+                <div class=container style="padding:20px 0 20px 0;color:white">
+                    <div style=width:300px;display:inline-block;margin-left:10px class="check-in-date-picker pull-left">
+                        <div class="input-group date pull-left">
+                            <input type=text class=form-control id="promo_code" value=""
+                                placeholder="Enter Promo Code" /> <span style class=input-group-btn> <button
+                                    class="btn btn-primary" id="promo" type=button>Apply</button></span>
+                        </div>
+                    </div>
+                    <div style="display:inline-block;padding-left: 20px;"><span id="promo_code_msg_old"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container2">
+        <div class="section">
+
+            <div style="display:none;" class="first-column">
+
+                <div id="map" style=""></div>
+            </div>
+
+
+            <div style="" class="col-sm-12 second-column">
+                <div id="loading" style="margin-top:20px;display:none;text-align:center;position: fixed;left: 40%;">
+                    <span style='padding-bottom:10px;font-size:16px;font-weight:bold;display:block;'>Loading Available
+                        Properties...</span><img src='https://www.bookandlink.com/booking/img/loading2.gif'>
+                </div>
+                <div id="resp_booking_page" style="padding-bottom:300px"></div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <script>
+
+
+        var elmnt = document.getElementById("header");
+        var y = elmnt.scrollHeight;
+        var x = elmnt.scrollWidth;
+        var height = $(window).height();
+        var map_height = height - y - 2;
+        $('#map').height(map_height);
+        $('.second-column').height(map_height);
+        $('#map').height(map_height);
+        $('.second-column').height(map_height);
+
+
+
+        $(window).resize(function () {
+            var elmnt = document.getElementById("header");
+            var y = elmnt.scrollHeight;
+            var x = elmnt.scrollWidth;
+            var height = $(window).height();
+            var map_height = height - y;
+            $('#map').height(map_height);
+            $('.second-column').height(map_height);
+        });
+
+
+
+
+
+
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#loading').show();
+            $('#map').hide();
+            var promo_code = $("#promo_code").val();
+            $("#checkin").prop('disabled', true);
+            $("#checkout").prop('disabled', true);
+            var search_tag = $(".search_tag").val();
+            var search_tag2 = $(".search_tag2").val();
+            var formData = {
+                'property_ids': '2220,2245,2565,2828,3052,3389',
+                'checkin': "01 06 2023",
+                'checkout': "07 06 2023",
+                'currency': "IDR",
+                'search_tag': search_tag,
+                'search_tag2': search_tag2,
+                'currency_convert': "IDR",
+                'property_lang': '',
+                'lang_id': '100',
+                'source_booking': '',
+                'google_tag': '',
+                'property_group_id': '65493'
+            };
+            $.ajax({
+                type: 'GET',
+                url: "https://bookandlink.com/booking/list_properties2.php",
+                data: formData, // our data object
+                dataType: 'html', // what type of data do we expect back from the server
+                encode: true,
+                cache: false
+            })
+                .done(function (data) {
+                    $('#loading').hide();
+                    $("#checkin").prop('disabled', false);
+                    $("#checkout").prop('disabled', false);
+                    $('#map').show();
+                    $('#resp_booking_page').html(data);
+
+                })
+        });
+
+
+
+
+
+        $('.check_availability').click(function () {
+            $(".currency").removeClass("selected");
+            $(".currency_icon").html('');
+            $(this).addClass("selected");
+            $('.first-column').hide();
+            $('.second-column').show();
+            $('.close_map').hide();
+            $('.show_map').show();
+
+            $('#map').hide();
+            $(this).find(".currency_icon").html(' <i style class="glyphicon glyphicon-ok"></i>');
+            $("#checkin").prop('disabled', true);
+            $("#checkout").prop('disabled', true);
+            // $('.currency-dropdown').collapse('hide');
+            $('#resp_booking_page').html('');
+            $('#loading').show();
+            var currency = $('#currency_code').html();
+            $("#currency_code").html(currency);
+            var promo_code = $("#promo_code").val();
+            var search_tag = $(".search_tag").val();
+            var search_tag2 = $(".search_tag2").val();
+            //  alert($('#checkin').datepicker({ dateFormat: 'dd mm yy' }).val());
+            // alert($("#checkin").datepicker("option", "dateFormat", "dd mm yy" ).val());
+            // var dateTypeVar = $('#checkin').datepicker('getDate');
+            const monthNames = ["January", "February", "March", "April", "May", "June",
+                "July", "August", "September", "October", "November", "December"
+            ];
+
+            var toto = $("#checkin").val();
+            var tata = $("#checkout").val();
+            $('.show_map').hide();
+            myArray = toto.split(" ");
+            myArray2 = tata.split(" ");
+            var month_checkin = myArray[1];
+            var month_checkout = myArray2[1];
+            month_checkin = month_checkin.toLowerCase();
+            month_checkout = month_checkout.toLowerCase();
+            var months = ["", "january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
+            month1 = months.indexOf(month_checkin);
+            month2 = months.indexOf(month_checkout);
+            if (month1 < 10)
+                month1 = "0" + month1;
+            if (month2 < 10)
+                month2 = "0" + month2;
+            var checkin = myArray[0] + ' ' + month1 + ' ' + myArray[2];
+            var checkout = myArray2[0] + ' ' + month2 + ' ' + myArray2[2];
+            var formData = {
+                'property_ids': '2220,2245,2565,2828,3052,3389',
+                'checkin': checkin,
+                'checkout': checkout,
+                'currency': "IDR",
+                'currency_convert': currency,
+                'search_tag': search_tag,
+                'search_tag2': search_tag2,
+                'property_lang': '',
+                'lang_id': '100',
+                'source_booking': '',
+                'google_tag': '',
+                'property_group_id': '65493'
+            };
+            $.ajax({
+                type: 'GET',
+                url: "https://bookandlink.com/booking/list_properties2.php",
+                data: formData, // our data object
+                dataType: 'html', // what type of data do we expect back from the server
+                encode: true,
+                cache: false
+            })
+                .done(function (data) {
+                    //  $("#checkin").datepicker("option", "dateFormat", "dd MM yy").val();
+                    //  $("#checkout").datepicker("option", "dateFormat", "dd MM yy").val();
+                    $('#loading').hide();
+                    $("#checkin").prop('disabled', false);
+                    $("#checkout").prop('disabled', false);
+                    $('#map').show();
+                    $('#resp_booking_page').html(data);
+
+                })
+        });
+
+
+
+        $('a.currency').click(function () {
+            $(".currency").removeClass("selected");
+            $(".currency_icon").html('');
+            $(this).addClass("selected");
+            $('#map').hide();
+            $(this).find(".currency_icon").html(' <i style class="glyphicon glyphicon-ok"></i>');
+            $("#checkin").prop('disabled', true);
+            $("#checkout").prop('disabled', true);
+            // $('.currency-dropdown').collapse('hide');
+            $('#resp_booking_page').html('');
+            $('#loading').show();
+            var currency = $(this).attr('data-currency');
+            $("#currency_code").html(currency);
+            var promo_code = $("#promo_code").val();
+            var search_tag = $(".search_tag").val();
+            var search_tag2 = $(".search_tag2").val();
+            var toto = $("#checkin").val();
+            var tata = $("#checkout").val();
+            myArray = toto.split(" ");
+            myArray2 = tata.split(" ");
+            var month_checkin = myArray[1];
+            var month_checkout = myArray2[1];
+            month_checkin = month_checkin.toLowerCase();
+            month_checkout = month_checkout.toLowerCase();
+            var months = ["", "january", "february", "march", "april", "may", "june", "july", "august", "september", "october", "november", "december"];
+            month1 = months.indexOf(month_checkin);
+            month2 = months.indexOf(month_checkout);
+            if (month1 < 10)
+                month1 = "0" + month1;
+            if (month2 < 10)
+                month2 = "0" + month2;
+            var checkin = myArray[0] + ' ' + month1 + ' ' + myArray[2];
+            var checkout = myArray2[0] + ' ' + month2 + ' ' + myArray2[2];
+            var formData = {
+                'property_ids': '2220,2245,2565,2828,3052,3389',
+                'checkin': checkin,
+                'checkout': checkout,
+                'currency': "IDR",
+                'currency_convert': currency,
+                'search_tag': search_tag,
+                'search_tag2': search_tag2,
+                'property_lang': '',
+                'lang_id': '100',
+                'source_booking': '',
+                'google_tag': '',
+                'property_group_id': '65493'
+
+            };
+            $.ajax({
+                type: 'GET',
+                url: "https://bookandlink.com/booking/list_properties2.php",
+                data: formData, // our data object
+                dataType: 'html', // what type of data do we expect back from the server
+                encode: true,
+                cache: false
+            })
+                .done(function (data) {
+                    $('#loading').hide();
+
+                    $("#checkin").prop('disabled', false);
+                    $("#checkout").prop('disabled', false);
+                    $('#map').show();
+                    $('#resp_booking_page').html(data);
+                })
+        });
+
+
+
+
+
+
+
+
+        $(function () {
+            render_calendar('');
+        });
+        function render_calendar(this_room_id) {
+            var days_custom = [];
+            var txt_custom = [];
+            var days_custom2 = [];
+            var txt_custom2 = [];
+            var booking_id = '';
+            var rateplan = $('#checkin' + this_room_id).attr('data-rateplan');
+            var roomtype = $('#checkin' + this_room_id).attr('data-roomtype');
+            var property = $('#checkin' + this_room_id).attr('data-property');
+            var months = $('#checkin' + this_room_id).attr('data-months');
+            var arrow = $('#checkin' + this_room_id).attr('data-arrow');
+            var url = $('#checkin' + this_room_id).attr('data-url');
+            var checkin = $('#checkin' + this_room_id).val();
+            var today = new Date();
+            var lastDate = new Date(today.getFullYear(), today.getMonth() + 24, today.getDate());
+            $.ajax({
+                type: "GET",
+                cache: false,
+                url: "https://www.bookandlink.com/ratewidget/calendar_widget_ibe.php?id=" + property,
+                dataType: 'json',
+                success: function (data) {
+                    for (var t in data) {
+                        days_custom[days_custom.length] = data[t].date;
+                        txt_custom[data[t].date] = data[t].rate;
+                    }
+                    var dateFormat = "dd MM yy",
+                        from = $("#checkin" + this_room_id).datepicker({
+                            onClose: function () {
+                                to.datepicker('show');
+                            },
+                            hideIfNoPrevNext: arrow,
+                            numberOfMonths: +months,
+                            dateFormat: 'dd MM yy',
+                            minDate: 0,
+                            maxDate: lastDate,
+                            beforeShow: function (input, inst) {
+                                $('#ui-datepicker-div').addClass('pickreserve');
+                                $('#ui-datepicker-div').removeClass('pickselect');
+                            },
+                            beforeShowDay: function (date) {
+                                t_date = $.datepicker.formatDate('yy-m-dd', date);
+                                if (days_custom.indexOf(t_date) > -1) {
+                                    return [false, 'free-day', txt_custom[t_date]];
+                                }
+                                else
+                                    return [true];
+                                if (days_custom2.indexOf(t_date) > -1) {
+                                    return [true, 'ntooltip', txt_custom2[t_date]];
+                                }
+                                return [true];
+                            }
+
+                        })
+                            .on("change", function () {
+                                to.datepicker("option", "minDate", getDate(this));
+                            }),
+                        to = $("#checkout" + this_room_id).datepicker({
+                            hideIfNoPrevNext: arrow,
+                            numberOfMonths: +months,
+                            dateFormat: 'dd MM yy',
+                            maxDate: lastDate,
+                            beforeShowDay: function (date) {
+                                t_date = $.datepicker.formatDate('yy-m-dd', date);
+                                if (days_custom.indexOf(t_date) > -1) {
+                                    return [true, 'free-day', txt_custom[t_date]];
+                                }
+                                if (days_custom2.indexOf(t_date) > -1) {
+                                    return [true, 'ntooltip', txt_custom2[t_date]];
+                                }
+                                return [true];
+                            }
+
+                        });
+
+                    function getDate(element) {
+                        var date;
+                        try {
+                            date = $.datepicker.parseDate(dateFormat, element.value);
+                            var newday = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1);
+                        } catch (error) {
+                            newday = null;
+                        }
+
+                        return newday;
+                    }
+                }
+            });
+            /*  end of ajax*/
+
+
+        }
+
+    </script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F4M995N2SY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-F4M995N2SY');
+    </script>
+</body>
+
+</html>
